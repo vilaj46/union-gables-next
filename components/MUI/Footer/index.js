@@ -20,21 +20,29 @@ function Footer() {
   return (
     <Container sx={{ paddingBottom: "100px" }}>
       <PageTitle header={2}>Union Gables Inn</PageTitle>
-      <IconContainer
-        label="55 Union Ave, Saratoga Springs, NY 12866, United States"
-        Icon={LocationOnIcon}
-        href={googleMap}
-      />
-      <IconContainer
-        label="518-584-1558"
-        Icon={LocalPhoneIcon}
-        href="tel:+5185841558"
-      />
-      <IconContainer
-        label="stay@uniongables.com"
-        Icon={EmailIcon}
-        href="mailto:stay@uniongables.com"
-      />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <IconContainer
+          label="55 Union Ave, Saratoga Springs, NY 12866, United States"
+          Icon={LocationOnIcon}
+          href={googleMap}
+        />
+        <IconContainer
+          label="518-584-1558"
+          Icon={LocalPhoneIcon}
+          href="tel:+5185841558"
+        />
+        <IconContainer
+          label="stay@uniongables.com"
+          Icon={EmailIcon}
+          href="mailto:stay@uniongables.com"
+        />
+      </div>
 
       <div style={{ textAlign: "center" }}>
         <SocialIcon Icon={FacebookIcon} />

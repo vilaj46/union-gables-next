@@ -25,7 +25,6 @@ const Title = styled.p`
 
 const ImageContainer = styled.div`
   height: 250px;
-  overflow: hidden;
   position: relative;
   background-image: ${(props) => `url(${props.src})`};
   background-size: cover;
@@ -82,6 +81,9 @@ function TextCarousel({ title = "Placeholder Title", items = sampleData }) {
         next={next}
         prev={prev}
         autoPlay={false}
+        sx={{
+          height: "100%",
+        }}
       >
         <ImageContainer title={items[index].alt} src={items[index].src}>
           <Darken />
