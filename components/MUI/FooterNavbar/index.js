@@ -15,9 +15,22 @@ import SampleLink from "./cms/SampleLink";
 import device from "../../../styles/device";
 
 const FooterContainer = styled.div`
-  display: block;
+  // display: block;
   @media ${device.tablet} {
     display: none;
+  }
+`;
+
+const Anchor = styled.a`
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.7rem;
+
+  @media ${device.mobileL} {
+    font-size: 1rem;
   }
 `;
 
@@ -57,7 +70,11 @@ function FooterNavbar({ LinkComponent = SampleLink }) {
         <AppBar
           position="fixed"
           color="primary"
-          sx={{ top: "auto", bottom: 0, backgroundColor: "#AA4465" }}
+          sx={{
+            top: "auto",
+            bottom: 0,
+            backgroundColor: "#AA4465",
+          }}
         >
           <Container>
             <Toolbar
@@ -68,92 +85,52 @@ function FooterNavbar({ LinkComponent = SampleLink }) {
             >
               <IconButton>
                 <LinkComponent href="/">
-                  <a
-                    style={{
-                      textDecoration: "none",
-                      color: "#ffffff",
-                      fontSize: "1rem",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
+                  <Anchor>
                     <div style={{ border: "1px solid transparent" }}>
                       <HouseIcon />
                     </div>
                     Home
-                  </a>
+                  </Anchor>
                 </LinkComponent>
               </IconButton>
               <IconButton>
                 <LinkComponent href="/">
-                  <a
-                    style={{
-                      textDecoration: "none",
-                      color: "#ffffff",
-                      fontSize: "1rem",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
+                  <Anchor>
                     <div style={{ border: "1px solid transparent" }}>
                       <LocalPhoneIcon />
                     </div>
                     Contact
-                  </a>
+                  </Anchor>
                 </LinkComponent>
               </IconButton>
               <IconButton>
                 <LinkComponent href="/">
-                  <a
-                    style={{
-                      textDecoration: "none",
-                      color: "#ffffff",
-                      fontSize: "1rem",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
+                  <Anchor>
                     <div style={{ border: "1px solid transparent" }}>
                       <LocationOnIcon />
                     </div>
                     Location
-                  </a>
+                  </Anchor>
                 </LinkComponent>
               </IconButton>
               <IconButton>
                 <LinkComponent href="/">
-                  <a
-                    style={{
-                      textDecoration: "none",
-                      color: "#ffffff",
-                      fontSize: "1rem",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
+                  <Anchor>
                     <div style={{ border: "1px solid transparent" }}>
                       <BedIcon />
                     </div>
                     Rooms
-                  </a>
+                  </Anchor>
                 </LinkComponent>
               </IconButton>
-              <IconButton>
+              <IconButton sx={{ backgroundColor: "#680727" }}>
                 <LinkComponent href="/">
-                  <a
-                    style={{
-                      textDecoration: "none",
-                      color: "#ffffff",
-                      fontSize: "1rem",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
-                  >
+                  <Anchor>
                     <div style={{ border: "1px solid transparent" }}>
                       <CalendarMonthIcon />
                     </div>
                     Book Now
-                  </a>
+                  </Anchor>
                 </LinkComponent>
               </IconButton>
             </Toolbar>
