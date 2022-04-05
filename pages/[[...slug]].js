@@ -15,6 +15,7 @@ import BlockContent from "@sanity/block-content-to-react";
 // Mobile Header and Footer
 
 // RedBallLinks mobile friendly.
+// / https://codepen.io/ryasan86/pen/QXwEbM
 
 // Sanity Client
 import client from "../client";
@@ -42,7 +43,6 @@ function Pages({
   headerLinks,
   slug,
 }) {
-  // const router = useRouter();
   const { body } = page;
   return (
     <main>
@@ -53,6 +53,7 @@ function Pages({
           types: {
             block: BlockRenderer,
             image: ImageRenderer,
+            doubleImages: ImageRenderer,
             break: BreakRenderer,
             redBallList: ObjectRenderer,
             carousel: CarouselRenderer,
@@ -64,7 +65,7 @@ function Pages({
       />
       {slug === "home-page" && <Map />}
       <Footer />
-      <FooterNavbar />
+      <FooterNavbar /> {/** Mobile only */}
     </main>
   );
 }
@@ -92,6 +93,9 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const { slug = "" } = context.params;
 
+  const header = await client.fetch(headerQuery);
+  const headerLinks = header[0].links;
+
   try {
     const page = await client.fetch(query, { slug: slug[0] });
     return {
@@ -103,8 +107,6 @@ export async function getStaticProps(context) {
     };
   } catch {
     const page = await client.fetch(query, { slug: "home-page" });
-    const header = await client.fetch(headerQuery);
-    const headerLinks = header[0].links;
     return {
       props: {
         headerLinks: headerLinks,
