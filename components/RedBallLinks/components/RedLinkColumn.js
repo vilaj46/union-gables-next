@@ -1,14 +1,21 @@
-import React from 'react'
-
+import React from "react";
+import styled from "styled-components";
 // Components
-import RedLink from './RedLink'
+import RedLink from "./RedLink";
 
 // Utilities
-import getRandomKey from '../../../clientUtils/getRandomKey'
+import getRandomKey from "../../../clientUtils/getRandomKey";
 
-function RedLinkColumn({links, randomKey = undefined}) {
+const Column = styled.li`
+  margin-bottom: 3.5rem;
+  @media (min-width: 600px) {
+    margin-bottom: 0;
+  }
+`;
+
+function RedLinkColumn({ links, randomKey = undefined }) {
   return (
-    <li>
+    <Column>
       {links.map((l, i) => {
         if (i !== links.length - 1) {
           return (
@@ -17,13 +24,18 @@ function RedLinkColumn({links, randomKey = undefined}) {
               includeBall={true}
               key={randomKey || l.text + l.href + getRandomKey()}
             />
-          )
+          );
         } else {
-          return <RedLink linkObj={l} key={randomKey || l.text + l.href + getRandomKey()} />
+          return (
+            <RedLink
+              linkObj={l}
+              key={randomKey || l.text + l.href + getRandomKey()}
+            />
+          );
         }
       })}
-    </li>
-  )
+    </Column>
+  );
 }
 
-export default RedLinkColumn
+export default RedLinkColumn;
