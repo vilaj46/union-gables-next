@@ -30,6 +30,7 @@ import TextCarouselRenderer from "../renderers/TextCarouselRenderer";
 import RedBallRenderer from "../renderers/RedBallRenderer";
 import DarkenSliderRenderer from "../renderers/DarkenSliderRenderer";
 import TripAdvisorRenderer from "../renderers/TripAdvisorRenderer";
+import YoutubeRenderer from "../renderers/YoutubeRenderer";
 
 // Components
 import Map from "../components/Map";
@@ -62,6 +63,7 @@ function Pages({
             text_carousel: TextCarouselRenderer,
             darkenSlider: DarkenSliderRenderer,
             tripAdvisor: TripAdvisorRenderer,
+            youtube: YoutubeRenderer,
           },
         }}
         {...client.config()}
