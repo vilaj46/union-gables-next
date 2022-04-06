@@ -25,7 +25,6 @@ const Img = styled.img`
 `;
 
 function DoubleImage({ images = sampleData }) {
-  console.log(images);
   return (
     <Container>
       <ImagesContainer>

@@ -25,10 +25,11 @@ import BlockRenderer from "../renderers/BlockRenderer";
 import ImageRenderer from "../renderers/ImageRenderer";
 import BreakRenderer from "../renderers/BreakRenderer";
 import ObjectRenderer from "../renderers/ObjectRenderer";
-// import SlideShowRenderer from "../renderers/SlideShowRenderer";
 import CarouselRenderer from "../renderers/CarouselRenderer";
 import TextCarouselRenderer from "../renderers/TextCarouselRenderer";
+import RedBallRenderer from "../renderers/RedBallRenderer";
 import DarkenSliderRenderer from "../renderers/DarkenSliderRenderer";
+import TripAdvisorRenderer from "../renderers/TripAdvisorRenderer";
 
 // Components
 import Map from "../components/Map";
@@ -56,9 +57,11 @@ function Pages({
             doubleImages: ImageRenderer,
             break: BreakRenderer,
             redBallList: ObjectRenderer,
+            redBall: RedBallRenderer,
             carousel: CarouselRenderer,
             text_carousel: TextCarouselRenderer,
             darkenSlider: DarkenSliderRenderer,
+            tripAdvisor: TripAdvisorRenderer,
           },
         }}
         {...client.config()}
