@@ -33,7 +33,7 @@ function createParagraphChildren(children, LinkComponent, NextComponent) {
           );
         }
       } else {
-        return <span key="bibbity">FILL IN SOMETHING HERE! -- {text}</span>;
+        return <strong key={node.children[0]}>{node.children[0]}</strong>;
       }
     }
   });

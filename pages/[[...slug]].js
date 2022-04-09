@@ -26,6 +26,7 @@ import ImageRenderer from "../renderers/ImageRenderer";
 import BreakRenderer from "../renderers/BreakRenderer";
 import ObjectRenderer from "../renderers/ObjectRenderer";
 import CarouselRenderer from "../renderers/CarouselRenderer";
+import SideCarouselRenderer from "../renderers/SideCarouselRenderer";
 import TextCarouselRenderer from "../renderers/TextCarouselRenderer";
 import RedBallRenderer from "../renderers/RedBallRenderer";
 import DarkenSliderRenderer from "../renderers/DarkenSliderRenderer";
@@ -60,6 +61,7 @@ function Pages({
             redBallList: ObjectRenderer,
             redBall: RedBallRenderer,
             carousel: CarouselRenderer,
+            sideCarousel: SideCarouselRenderer,
             text_carousel: TextCarouselRenderer,
             darkenSlider: DarkenSliderRenderer,
             tripAdvisor: TripAdvisorRenderer,
