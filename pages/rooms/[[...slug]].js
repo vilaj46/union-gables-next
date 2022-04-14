@@ -33,6 +33,7 @@ import DarkenSliderRenderer from "../../renderers/DarkenSliderRenderer";
 import TripAdvisorRenderer from "../../renderers/TripAdvisorRenderer";
 import YoutubeRenderer from "../../renderers/YoutubeRenderer";
 import BookNowRenderer from "../../renderers/BookNowRenderer";
+import AmenitiesRenderer from "../../renderers/AmenitiesRenderer";
 
 // Components
 import Map from "../../components/Map";
@@ -55,6 +56,7 @@ function Rooms({
         blocks={body || []}
         serializers={{
           types: {
+            amenities: AmenitiesRenderer,
             block: BlockRenderer,
             booknow: BookNowRenderer,
             image: ImageRenderer,
