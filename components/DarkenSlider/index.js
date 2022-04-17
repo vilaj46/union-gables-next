@@ -1,4 +1,5 @@
 import React from "react";
+import { Container } from "@mui/material";
 import styled from "styled-components";
 
 import device from "../../styles/device";
@@ -10,7 +11,7 @@ import IndividualSlider from "./components/IndividualSlider";
 const FontStyles = globalStyles[0];
 const Theme = globalStyles[1];
 
-const Container = styled.div`
+const DarkenSliderContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,15 +42,17 @@ export default function DarkenSlider({ list = [], long = false }) {
   return (
     <Theme>
       <FontStyles />
-      <Container long={long}>
-        {standardizedList.map((obj, index) => (
-          <IndividualSlider
-            data={obj}
-            key={index}
-            position={index}
-            long={long}
-          />
-        ))}
+      <Container maxWidth="md">
+        <DarkenSliderContainer long={long}>
+          {standardizedList.map((obj, index) => (
+            <IndividualSlider
+              data={obj}
+              key={index}
+              position={index}
+              long={long}
+            />
+          ))}
+        </DarkenSliderContainer>
       </Container>
     </Theme>
   );

@@ -3,13 +3,29 @@ import React from "react";
 // import { useRouter } from "next/router";
 
 // Components
-import CustomCarousel from "../components/MUI/Carousel";
+// import Gallery from "../components/Gallery";
+// import CustomCarousel from "../components/MUI/Carousel";
 // import Header from "../components/MUI/Header";
 
+import { Images } from "../@core/components/Images/Images";
+
 function MUI() {
+  const imgOne = "/static/images/doubleImages/doubleOne.jpg";
+  const imgTwo = "/static/images/doubleImages/doubleTwo.jpg";
+  const images = [
+    {
+      src: imgOne,
+      alt: "Image One Alt",
+    },
+    {
+      src: imgTwo,
+      alt: "Image Two Alt",
+    },
+  ];
   return (
     <div style={{ overflowX: "hidden" }}>
-      <CustomCarousel />
+      <Images src={imgOne} />
+      {/* <Gallery /> */}
       {/* <Header /> */}
     </div>
   );

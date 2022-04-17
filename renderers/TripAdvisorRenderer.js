@@ -7,7 +7,8 @@ const TripAdvisorRenderer = (props) => {
   const { _type = "tripAdvisor" } = props.node;
 
   if (_type === "tripAdvisor") {
-    return <TripAdvisor />;
+    const { center } = props.node;
+    return <TripAdvisor center={center} />;
   }
   return BlockContent.defaultSerializers.types.block(props);
 };

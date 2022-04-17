@@ -54,9 +54,7 @@ function Pages({
         blocks={body || []}
         serializers={{
           types: {
-            block: BlockRenderer,
-            image: ImageRenderer,
-            doubleImages: ImageRenderer,
+            block: BlockRenderer, // Default
             break: BreakRenderer,
             redBallList: ObjectRenderer,
             redBall: RedBallRenderer,
@@ -66,11 +64,19 @@ function Pages({
             darkenSlider: DarkenSliderRenderer,
             tripAdvisor: TripAdvisorRenderer,
             youtube: YoutubeRenderer,
+
+            // Objects
+            pageTitles: ObjectRenderer,
+
+            // Images
+            image: ImageRenderer,
+            images: ImageRenderer,
+            doubleImages: ImageRenderer,
           },
         }}
         {...client.config()}
       />
-      {slug === "home-page" && <Map />}
+      {/* {slug === "home-page" && <Map />} */}
       <Footer />
       <FooterNavbar /> {/** Mobile only */}
     </main>
@@ -91,6 +97,7 @@ export async function getStaticPaths() {
       params: { slug: [pageObj.slug.current] },
     };
   });
+
   return {
     paths: createdPaths,
     fallback: true,

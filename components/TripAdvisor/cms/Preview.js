@@ -4,8 +4,9 @@ import TripAdvisor from "../index";
 
 import tripAdvisorImg from "../../../static/images/tripAdvisor.png";
 
-function Preview() {
-  return <TripAdvisor src={tripAdvisorImg} />;
+function Preview({ value }) {
+  const { center } = value;
+  return <TripAdvisor src={tripAdvisorImg} center={center} />;
 }
 
 export default Preview;

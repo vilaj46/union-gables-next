@@ -8,7 +8,6 @@ const BlockRenderer = (props) => {
   const { style = "amenities" } = props.node;
 
   if (style === "amenities") {
-    console.log(props);
     const { amenitiesList } = props;
     return <Amenities amenities={amenitiesList} />;
   }

@@ -56,11 +56,7 @@ function Rooms({
         blocks={body || []}
         serializers={{
           types: {
-            amenities: AmenitiesRenderer,
-            block: BlockRenderer,
-            booknow: BookNowRenderer,
-            image: ImageRenderer,
-            doubleImages: ImageRenderer,
+            block: BlockRenderer, // Default
             break: BreakRenderer,
             redBallList: ObjectRenderer,
             redBall: RedBallRenderer,
@@ -70,6 +66,14 @@ function Rooms({
             darkenSlider: DarkenSliderRenderer,
             tripAdvisor: TripAdvisorRenderer,
             youtube: YoutubeRenderer,
+
+            // Objects
+            pageTitles: ObjectRenderer,
+
+            // Images
+            image: ImageRenderer,
+            images: ImageRenderer,
+            doubleImages: ImageRenderer,
           },
         }}
         {...client.config()}
@@ -90,13 +94,21 @@ const headerQuery = groq`*[_type == "header"]`;
 
 export async function getStaticPaths() {
   const paths = await client.fetch(groq`*[_type == "room"]`);
+  const pages = await client.fetch(groq`*[_type == "page"]`);
   const createdPaths = paths.map((pageObj) => {
     return {
       params: { slug: [pageObj.slug.current] },
     };
   });
+
+  const pagesPaths = pages.map((pageObj) => {
+    return {
+      params: { slug: [pageObj.slug.current] },
+    };
+  });
+
   return {
-    paths: createdPaths,
+    paths: [...createdPaths, ...pagesPaths],
     fallback: true,
   };
 }
@@ -107,27 +119,30 @@ export async function getStaticProps(context) {
   const header = await client.fetch(headerQuery);
   const headerLinks = header[0].links;
 
-  const page = await client.fetch(query, { slug: `/rooms/${slug[0]}` });
-
-  return {
-    props: {
-      headerLinks: headerLinks,
-      page: page || {},
-      slug: slug[0],
-    },
-  };
-
   try {
+    if (slug[0] === undefined) {
+      throw "Rooms page.";
+    }
+    const page = await client.fetch(query, { slug: `/rooms/${slug[0]}` });
+
+    return {
+      props: {
+        headerLinks: headerLinks,
+        page: page || {},
+        slug: slug[0],
+      },
+    };
   } catch {
     // Probably don't need this.
-    // const page = await client.fetch(query, { slug: "home-page" });
-    // return {
-    //   props: {
-    //     headerLinks: headerLinks,
-    //     page: page,
-    //     slug: "home-page",
-    //   },
-    // };
+    const page = await client.fetch(query, { slug: "rooms" });
+
+    return {
+      props: {
+        headerLinks: headerLinks,
+        page: page,
+        slug: "rooms",
+      },
+    };
   }
 }
 

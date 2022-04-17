@@ -88,7 +88,7 @@ function Dropdown({ link, LinkComponent, hovering, setHovering }) {
             <Anchor>{link.label}</Anchor>
           </LinkComponent>
         </Button>
-        {linkLabelLowercase === hovering && (
+        {linkLabelLowercase === hovering && link.dropdown !== undefined && (
           <Popper
             open={open}
             anchorEl={anchorRef.current}
@@ -112,23 +112,28 @@ function Dropdown({ link, LinkComponent, hovering, setHovering }) {
                       id="composition-menu"
                       aria-labelledby="composition-button"
                     >
-                      {link.dropdown.map((dropLink) => (
-                        <MenuItem
-                          onClick={handleClose}
-                          key={dropLink.href + dropLink.label}
-                        >
-                          <LinkComponent href={dropLink.href}>
-                            <a
-                              style={{
-                                textDecoration: "none",
-                                color: "#333",
-                              }}
-                            >
-                              {dropLink.label}
-                            </a>
-                          </LinkComponent>
-                        </MenuItem>
-                      ))}
+                      <MenuItem style={{ height: 0, width: 0, opacity: 0 }}>
+                        a
+                      </MenuItem>
+                      {link.dropdown.map((dropLink) => {
+                        return (
+                          <MenuItem
+                            onClick={handleClose}
+                            key={dropLink.href + dropLink.label}
+                          >
+                            <LinkComponent href={dropLink.href}>
+                              <a
+                                style={{
+                                  textDecoration: "none",
+                                  color: "#333",
+                                }}
+                              >
+                                {dropLink.label}
+                              </a>
+                            </LinkComponent>
+                          </MenuItem>
+                        );
+                      })}
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>

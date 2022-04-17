@@ -41,7 +41,6 @@ const Container = styled.div`
 `;
 
 function CustomCarousel({ images = sampleData }) {
-  console.log(images);
   return (
     <Container>
       <Carousel

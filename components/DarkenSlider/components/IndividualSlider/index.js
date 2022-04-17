@@ -11,9 +11,6 @@ import CenterMainText from "./components/CenterMainText";
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  width: 100%;
-  // max-width: 750px;
-  height: min-content;
   overflow: hidden;
   text-align: center;
   position: relative;

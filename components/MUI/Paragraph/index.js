@@ -18,7 +18,7 @@ export function Paragraph({ children }) {
   return (
     <Theme>
       <FontStyles />
-      <Container>
+      <Container maxWidth="md">
         <ParagraphContainer>{children}</ParagraphContainer>
       </Container>
     </Theme>

@@ -6,15 +6,12 @@ export default {
   name: "tripAdvisor",
   type: "object",
   title: "Trip Advisor",
-  preview: {
-    component: Preview,
-  },
   fields: [
     {
       name: "width",
       title: "Width",
       type: "string",
-      initialValue: "200",
+      initialValue: "225",
     },
     {
       name: "height",
@@ -22,5 +19,22 @@ export default {
       type: "string",
       initialValue: "150",
     },
+    {
+      name: "center",
+      title: "Center",
+      description: "The position of the image. Otherwise, left aligned.",
+      type: "boolean",
+      initialValue: false,
+    },
   ],
+  preview: {
+    component: Preview,
+    select: {
+      center: "center",
+    },
+    prepare(selection) {
+      const { center } = selection;
+      return { center };
+    },
+  },
 };
