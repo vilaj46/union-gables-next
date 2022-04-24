@@ -1,6 +1,7 @@
 import React from "react";
 import groq from "groq";
 import Link from "next/link";
+import Head from "next/head";
 // import { useRouter } from "next/router";
 import BlockContent from "@sanity/block-content-to-react";
 
@@ -48,9 +49,14 @@ function Rooms({
   headerLinks,
   slug,
 }) {
-  const { body } = page;
+  const { body, description, title } = page;
   return (
     <main>
+      <Head>
+        <title>{title}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="description" content={description}></meta>
+      </Head>
       <HeaderNavbar LinkComponent={Link} links={headerLinks} />
       <BlockContent
         blocks={body || []}

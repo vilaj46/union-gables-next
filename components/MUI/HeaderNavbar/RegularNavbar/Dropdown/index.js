@@ -21,12 +21,26 @@ const Anchor = styled.a`
   }
 `;
 
-function Dropdown({ link, LinkComponent, hovering, setHovering }) {
+function Dropdown({ link, LinkComponent, hovering, setHovering, asPath }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
   const linkLabelLowercase = link.label.toLowerCase();
   const isBooknow = link.label === "Book Now";
+
+  const isActivelink = link.href.includes(asPath);
+
+  const getBGColor = () => {
+    if (isBooknow) {
+      return "#350313";
+    } else if (isActivelink && asPath !== "/") {
+      return "#E1C2CE";
+    } else {
+      return "#AA4465";
+    }
+  };
+
+  const bgColor = getBGColor();
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -81,12 +95,19 @@ function Dropdown({ link, LinkComponent, hovering, setHovering }) {
           aria-haspopup="true"
           sx={{
             color: "#ffffff",
-            backgroundColor: `${isBooknow ? "#350313" : ""}`,
+            backgroundColor: `${bgColor}`,
           }}
         >
-          <LinkComponent href={link.href}>
-            <Anchor>{link.label}</Anchor>
-          </LinkComponent>
+          {!link.href.includes("resnexus") && (
+            <LinkComponent href={link.href}>
+              <Anchor>{link.label}</Anchor>
+            </LinkComponent>
+          )}
+          {link.href.includes("resnexus") && (
+            <Anchor href={link.href} rel="noopener noreferrer" target="_blank">
+              {link.label}
+            </Anchor>
+          )}
         </Button>
         {linkLabelLowercase === hovering && link.dropdown !== undefined && (
           <Popper
@@ -116,10 +137,25 @@ function Dropdown({ link, LinkComponent, hovering, setHovering }) {
                         a
                       </MenuItem>
                       {link.dropdown.map((dropLink) => {
+                        const isActiveDropLink = dropLink.href.includes(asPath);
+                        const getBGDropdown = () => {
+                          if (isBooknow) {
+                            return "#350313";
+                          } else if (isActiveDropLink && asPath !== "/") {
+                            return "#E1C2CE";
+                          } else {
+                            return "#ffffff";
+                          }
+                        };
+
+                        const dropdownColor = getBGDropdown();
                         return (
                           <MenuItem
                             onClick={handleClose}
                             key={dropLink.href + dropLink.label}
+                            sx={{
+                              backgroundColor: `${dropdownColor}`,
+                            }}
                           >
                             <LinkComponent href={dropLink.href}>
                               <a

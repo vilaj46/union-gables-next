@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -26,10 +26,11 @@ const LinksContainer = styled.div`
   }
 `;
 
-const ResponsiveAppBar = ({ links, LinkComponent }) => {
+const ResponsiveAppBar = ({ links, LinkComponent, asPath }) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   // const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [hovering, setHovering] = React.useState("");
+  const [isFixed, setIsFixed] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -39,12 +40,30 @@ const ResponsiveAppBar = ({ links, LinkComponent }) => {
     setAnchorElNav(null);
   };
 
+  function onScroll() {
+    if (window.scrollY > 0) {
+      setIsFixed(true);
+    } else {
+      setIsFixed(false);
+    }
+  }
+
+  useEffect(() => {
+    if (window) {
+      window.addEventListener("scroll", onScroll);
+    }
+  }, []);
+
   return (
     <AppBar
-      position="fixed"
+      // position="static"
+      position={isFixed ? "fixed" : "relative"}
       sx={{
         top: "0",
         backgroundColor: "#AA4465",
+        width: "100%",
+        margin: "0 auto",
+        paddingLeft: "0",
       }}
     >
       <Container maxWidth="xl">
@@ -127,6 +146,7 @@ const ResponsiveAppBar = ({ links, LinkComponent }) => {
                 hovering={hovering}
                 setHovering={setHovering}
                 key={link.label + link.href}
+                asPath={asPath}
               />
             ))}
           </LinksContainer>

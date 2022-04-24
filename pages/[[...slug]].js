@@ -1,21 +1,30 @@
 import React from "react";
 import groq from "groq";
 import Link from "next/link";
-// import { useRouter } from "next/router";
+import Head from "next/head";
 import BlockContent from "@sanity/block-content-to-react";
 
-// No drop down for rooms in header.
-// Dropdown for other things though.
-
-// A way to showcase specific rooms.
-// Can be simple better placement for higher quality rooms
-
-// Room Pages and Home Page
-// Keep image slider
-// Mobile Header and Footer
-
-// RedBallLinks mobile friendly.
-// / https://codepen.io/ryasan86/pen/QXwEbM
+/**
+ * TODO:
+ * 4. Footer:
+ *  a. Not current in the CMS.
+ *  b. Style the on hover differently?
+ *  c. Footer needs to have more fluid scaling.
+ *  d. Make the buttons smaller.
+ *  e. Are the links working?
+ *
+ * 6. Gallery:
+ *  a. Add a photo gallery.
+ * 7. Add Blog section.
+ * 8. Room pages need help!
+ * 9. 404 page
+ * 10. Site map
+ *
+ *
+ *
+ * Different style to RedBallLinks that I may want to try in the future:
+ * https://codepen.io/ryasan86/pen/QXwEbM
+ */
 
 // Sanity Client
 import client from "../client";
@@ -34,7 +43,6 @@ import TripAdvisorRenderer from "../renderers/TripAdvisorRenderer";
 import YoutubeRenderer from "../renderers/YoutubeRenderer";
 
 // Components
-import Map from "../components/Map";
 import Footer from "../components/MUI/Footer";
 import HeaderNavbar from "../components/MUI/HeaderNavbar";
 import FooterNavbar from "../components/MUI/FooterNavbar";
@@ -44,11 +52,17 @@ function Pages({
     body: [],
   },
   headerLinks,
-  slug,
 }) {
-  const { body } = page;
+  const { body, title, description } = page;
+
   return (
     <main>
+      <Head>
+        <title>{title}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="description" content={description}></meta>
+      </Head>
       <HeaderNavbar LinkComponent={Link} links={headerLinks} />
       <BlockContent
         blocks={body || []}
@@ -76,7 +90,6 @@ function Pages({
         }}
         {...client.config()}
       />
-      {/* {slug === "home-page" && <Map />} */}
       <Footer />
       <FooterNavbar /> {/** Mobile only */}
     </main>
@@ -85,7 +98,8 @@ function Pages({
 
 const query = groq`*[_type == "page" && slug.current == $slug][0]{
   title,
-  body
+  body,
+  description
 }`;
 
 const headerQuery = groq`*[_type == "header"]`;
@@ -121,6 +135,7 @@ export async function getStaticProps(context) {
     };
   } catch {
     const page = await client.fetch(query, { slug: "home-page" });
+    console.log(page);
     return {
       props: {
         headerLinks: headerLinks,

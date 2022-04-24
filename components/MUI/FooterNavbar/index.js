@@ -15,7 +15,6 @@ import SampleLink from "./cms/SampleLink";
 import device from "../../../styles/device";
 
 const FooterContainer = styled.div`
-  // display: block;
   @media ${device.tablet} {
     display: none;
   }

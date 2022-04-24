@@ -12,28 +12,23 @@ const Container = styled.img`
   &:hover {
     cursor: pointer;
   }
-`;
 
-const Anchor = styled.a`
-  // @media ${device.tablet} {
-  //   display: none;
-  // }
+  @media (${device.mobileL}) {
+    width: 150px;
+    height: 70px;
+  }
 `;
 
 function Logo({ LinkComponent = null }) {
   // For preview
   if (LinkComponent === null) {
     return (
-      // <Anchor>
       <Container src="/static/images/LOGO.png" alt="Union Gables Inn Logo" />
-      // </Anchor>
     );
   } else {
     return (
       <LinkComponent href="/">
-        {/* <Anchor> */}
         <Container src="/static/images/LOGO.png" alt="Union Gables Inn Logo" />
-        {/* </Anchor> */}
       </LinkComponent>
     );
   }

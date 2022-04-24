@@ -8,26 +8,26 @@ import device from "../../../styles/device";
 import sampleData from "./data";
 
 const ImageContainer = styled.div`
-  width: 100%;
-  min-width: 100%;
-  max-width: 100%;
+  // width: 100%;
+  // min-width: 100%;
+  // max-width: 100%;
   z-index: 30;
   object-fit: cover;
 
-  @media (${device.tablet}) {
-    height: 50vh;
-  }
-  @media (${device.laptop}) {
-    height: 65vh;
-  }
-  @media (${device.laptopL}) {
-    height: 90vh;
-  }
+  // @media (${device.tablet}) {
+  //   height: 50vh;
+  // }
+  // @media (${device.laptop}) {
+  //   height: 65vh;
+  // }
+  // @media (${device.laptopL}) {
+  //   height: 90vh;
+  // }
 `;
 
 const Container = styled.div`
   overflow: hidden;
-  height: 30vh;
+  // height: 30vh;
 
   @media (${device.tablet}) {
     height: 50vh;
@@ -44,7 +44,6 @@ function CustomCarousel({ images = sampleData }) {
   return (
     <Container>
       <Carousel
-        showArrows={false}
         transitionTime={0}
         dynamicHeight={true}
         sx={{
