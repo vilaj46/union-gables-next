@@ -64,6 +64,7 @@ const ResponsiveAppBar = ({ links, LinkComponent, asPath }) => {
         width: "100%",
         margin: "0 auto",
         paddingLeft: "0",
+        zIndex: 100,
       }}
     >
       <Container maxWidth="xl">
