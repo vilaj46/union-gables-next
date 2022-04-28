@@ -52,6 +52,7 @@ function Pages({
     body: [],
   },
   headerLinks,
+  footerData,
 }) {
   const { body, title, description } = page;
 
@@ -60,7 +61,7 @@ function Pages({
       <Head>
         <title>{title}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="description" content={description}></meta>
       </Head>
       <HeaderNavbar LinkComponent={Link} links={headerLinks} />
@@ -90,8 +91,8 @@ function Pages({
         }}
         {...client.config()}
       />
-      <Footer />
-      <FooterNavbar /> {/** Mobile only */}
+      {footerData && <Footer data={footerData} />}
+      {footerData && <FooterNavbar data={footerData} />} {/** Mobile only */}
     </main>
   );
 }
@@ -103,6 +104,7 @@ const query = groq`*[_type == "page" && slug.current == $slug][0]{
 }`;
 
 const headerQuery = groq`*[_type == "header"]`;
+const footerQuery = groq`*[_type == "footer"]`;
 
 export async function getStaticPaths() {
   const paths = await client.fetch(groq`*[_type == "page"]`);
@@ -123,22 +125,25 @@ export async function getStaticProps(context) {
 
   const header = await client.fetch(headerQuery);
   const headerLinks = header[0].links;
+  const footer = await client.fetch(footerQuery);
+  const footerData = footer[0];
 
   try {
     const page = await client.fetch(query, { slug: slug[0] });
     return {
       props: {
         headerLinks: headerLinks,
+        footerData: footerData,
         page: page || {},
         slug: slug[0],
       },
     };
   } catch {
     const page = await client.fetch(query, { slug: "home-page" });
-    console.log(page);
     return {
       props: {
         headerLinks: headerLinks,
+        footerData: footerData,
         page: page,
         slug: "home-page",
       },
