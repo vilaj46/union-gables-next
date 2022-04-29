@@ -35,11 +35,13 @@ const Anchor = styled.a`
 
 // Currently not server side rendered
 // because hydration and scroll event
-function FooterNavbar({ LinkComponent = SampleLink }) {
+function FooterNavbar({ LinkComponent = SampleLink, data }) {
   const TTL = 500;
   const [timeout, setTimer] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
+
+  const { telephone } = data;
 
   function onScroll() {
     setIsScrolling(true);
@@ -93,7 +95,7 @@ function FooterNavbar({ LinkComponent = SampleLink }) {
                 </LinkComponent>
               </IconButton>
               <IconButton>
-                <LinkComponent href="/">
+                <LinkComponent href={`tel:+${telephone}`}>
                   <Anchor>
                     <div style={{ border: "1px solid transparent" }}>
                       <LocalPhoneIcon />

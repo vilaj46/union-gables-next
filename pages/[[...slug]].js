@@ -57,12 +57,13 @@ function Pages({
   const { body, title, description } = page;
 
   return (
-    <main>
+    <main style={{ overflow: "hidden" }}>
       <Head>
-        <title>{title}</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        {/* <meta name="viewport" content="width=device-width" /> */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="description" content={description}></meta>
+        <title>{title}</title>
       </Head>
       <HeaderNavbar LinkComponent={Link} links={headerLinks} />
       <BlockContent
@@ -92,7 +93,7 @@ function Pages({
         {...client.config()}
       />
       {footerData && <Footer data={footerData} />}
-      {footerData && <FooterNavbar data={footerData} />} {/** Mobile only */}
+      {footerData && <FooterNavbar data={footerData} />} {/* Mobile only */}
     </main>
   );
 }

@@ -8,7 +8,6 @@ const size = {
   desktop: "1920px",
 };
 
-//
 const device = {
   mobileS: `(min-width: ${size.mobileS})`,
   mobileM: `(min-width: ${size.mobileM})`,

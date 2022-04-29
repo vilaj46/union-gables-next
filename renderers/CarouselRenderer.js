@@ -1,8 +1,10 @@
 import React from "react";
 import BlockContent from "@sanity/block-content-to-react";
 
-import Carousel from "../components/MUI/Carousel";
+// import Carousel from "../components/MUI/Carousel";
 import createImages from "../components/MUI/Carousel/utilities/createImages";
+
+import { Carousel } from "../@core/components/Carousel/Carousel";
 
 const CarouselRenderer = (props) => {
   const { _type = "carousel" } = props.node;
