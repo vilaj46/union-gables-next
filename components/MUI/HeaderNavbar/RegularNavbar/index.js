@@ -41,7 +41,7 @@ const ResponsiveAppBar = ({ links, LinkComponent, asPath }) => {
   };
 
   function onScroll() {
-    if (window.scrollY > 0) {
+    if (window.scrollY > 70) {
       setIsFixed(true);
     } else {
       setIsFixed(false);
@@ -65,6 +65,7 @@ const ResponsiveAppBar = ({ links, LinkComponent, asPath }) => {
         margin: "0 auto",
         paddingLeft: "0",
         zIndex: 100,
+        transition: "all 0.5s ease",
       }}
     >
       <Container maxWidth="xl">

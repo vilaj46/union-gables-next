@@ -15,6 +15,7 @@ const BallsContainer = styled.div`
   justify-content: center;
   width: 50%;
   margin: 0 auto;
+  margin-top: 12px;
 `;
 
 const Ball = styled.div`
@@ -23,7 +24,7 @@ const Ball = styled.div`
   background-color: #3f3f3f;
   border-radius: 100%;
   cursor: pointer;
-  margin: 0 3px;
+  margin: 0 4px;
 `;
 
 const sampleImages = [

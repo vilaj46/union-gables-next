@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import TripOriginIcon from "@mui/icons-material/TripOrigin";
@@ -25,7 +24,6 @@ function Footer({ data }) {
     pinterest,
     telephone,
     tripadvisor,
-    twitter,
   } = data;
   return (
     <Container sx={{ paddingBottom: "100px" }}>
@@ -56,7 +54,6 @@ function Footer({ data }) {
 
       <div style={{ textAlign: "center" }}>
         <SocialIcon Icon={FacebookIcon} href={facebook} />
-        <SocialIcon Icon={TwitterIcon} href={twitter} />
         <SocialIcon Icon={InstagramIcon} href={instagram} />
         <SocialIcon Icon={PinterestIcon} href={pinterest} />
         <SocialIcon Icon={TripOriginIcon} href={tripadvisor} />

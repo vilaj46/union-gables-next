@@ -37,6 +37,8 @@ const theme = {
 
     // Blues
     jellyBean: "#4F7882",
+
+    white: "#ffffff",
   },
   fontSizes: {
     small: "0.875rem",

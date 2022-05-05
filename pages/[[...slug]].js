@@ -4,28 +4,6 @@ import Link from "next/link";
 import Head from "next/head";
 import BlockContent from "@sanity/block-content-to-react";
 
-/**
- * TODO:
- * 4. Footer:
- *  a. Not current in the CMS.
- *  b. Style the on hover differently?
- *  c. Footer needs to have more fluid scaling.
- *  d. Make the buttons smaller.
- *  e. Are the links working?
- *
- * 6. Gallery:
- *  a. Add a photo gallery.
- * 7. Add Blog section.
- * 8. Room pages need help!
- * 9. 404 page
- * 10. Site map
- *
- *
- *
- * Different style to RedBallLinks that I may want to try in the future:
- * https://codepen.io/ryasan86/pen/QXwEbM
- */
-
 // Sanity Client
 import client from "../client";
 
@@ -43,9 +21,13 @@ import TripAdvisorRenderer from "../renderers/TripAdvisorRenderer";
 import YoutubeRenderer from "../renderers/YoutubeRenderer";
 
 // Components
+import { Header } from "../@platform/components/Header/Header";
 import Footer from "../components/MUI/Footer";
-import HeaderNavbar from "../components/MUI/HeaderNavbar";
 import FooterNavbar from "../components/MUI/FooterNavbar";
+
+import styles from "../@core/styles/theme.default";
+
+const { Theme, Fonts } = styles;
 
 function Pages({
   page = {
@@ -55,7 +37,6 @@ function Pages({
   footerData,
 }) {
   const { body, title, description } = page;
-
   return (
     <main style={{ overflow: "hidden" }}>
       <Head>
@@ -65,35 +46,39 @@ function Pages({
         <meta name="description" content={description}></meta>
         <title>{title}</title>
       </Head>
-      <HeaderNavbar LinkComponent={Link} links={headerLinks} />
-      <BlockContent
-        blocks={body || []}
-        serializers={{
-          types: {
-            block: BlockRenderer, // Default
-            break: BreakRenderer,
-            redBallList: ObjectRenderer,
-            redBall: RedBallRenderer,
-            carousel: CarouselRenderer,
-            sideCarousel: SideCarouselRenderer,
-            text_carousel: TextCarouselRenderer,
-            darkenSlider: DarkenSliderRenderer,
-            tripAdvisor: TripAdvisorRenderer,
-            youtube: YoutubeRenderer,
+      <Theme>
+        <Fonts />
+        {headerLinks && <Header links={headerLinks} />}
+        {/* <HeaderNavbar LinkComponent={Link} links={headerLinks} /> */}
+        <BlockContent
+          blocks={body || []}
+          serializers={{
+            types: {
+              block: BlockRenderer, // Default
+              break: BreakRenderer,
+              redBallList: ObjectRenderer,
+              redBall: RedBallRenderer,
+              carousel: CarouselRenderer,
+              sideCarousel: SideCarouselRenderer,
+              text_carousel: TextCarouselRenderer,
+              darkenSlider: DarkenSliderRenderer,
+              tripAdvisor: TripAdvisorRenderer,
+              youtube: YoutubeRenderer,
 
-            // Objects
-            pageTitles: ObjectRenderer,
+              // Objects
+              pageTitles: ObjectRenderer,
 
-            // Images
-            image: ImageRenderer,
-            images: ImageRenderer,
-            doubleImages: ImageRenderer,
-          },
-        }}
-        {...client.config()}
-      />
-      {footerData && <Footer data={footerData} />}
-      {footerData && <FooterNavbar data={footerData} />} {/* Mobile only */}
+              // Images
+              image: ImageRenderer,
+              images: ImageRenderer,
+              doubleImages: ImageRenderer,
+            },
+          }}
+          {...client.config()}
+        />
+        {footerData && <Footer data={footerData} />}
+        {footerData && <FooterNavbar data={footerData} />} Mobile only
+      </Theme>
     </main>
   );
 }
