@@ -1,18 +1,16 @@
 import styled from "styled-components";
 
-import device from "../../styles/device";
-
 export const DoubleImgsContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: ${(props) => props.margin}px;
+  margin-top: ${(props) => props.margin}px;
 
   @media only screen and (min-width: 1024px) {
     flex-direction: row;
     justify-content: space-between;
   }
 `;
-
-// @media only screen and (${device.laptop}) {
 
 export const DoubleImg = styled.img`
   margin-bottom: 25px;

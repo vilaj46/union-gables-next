@@ -1,4 +1,34 @@
 /**
+ * Plug into Sanity:
+ * DarkenSlider
+ *
+ * FIRST PAGE:
+ *  Header - revisit after we check lighthouse or whatever.
+ *  Footer - revisit after we check lighthouse or whatever.
+ *  Add padding option to the Emphasis component.
+ *  Add padding or margin option to Center component.
+ *  THREE REASONS __---
+ *  DarkenSlider:
+ *      1. Click event for phones.
+ *  ImageTextSlider clean up
+ *  ColumnOfLinks accept html for text.
+ * H4-H6 for the amenities page. Margin for side by side carousel
+ * Add Full screen to HR / break
+ * delete double images?
+ * better spacing forpage titles
+ * site map
+ *
+ * Figure out font size - font length.
+ *
+ * PAGES:
+ * historic-lodging
+ * event-inquiries
+ * location
+ * gallery
+ * events
+ * https://resnexus.com/resnexus/reservations/book/5888F13B-7306-4082-89C2-B6F42CC9CD92/?roomClass=6
+ *
+ *
  * Clean up files, make them alphabetical order
  * and correct the import / export statements.
  * Make core components.
@@ -10,8 +40,6 @@
  * Clean up footer.
  *
  * Fix darken slider.
- *
- * https://my.matterport.com/show/?m=XqZiKgRgD1h&fbclid=IwAR3M-JP_sA10bViVzBqNSYCJyDxpOkBK8X0Xpf1zkL3HCFkyhRQ8KcxC5Dc
  */
 
 /**

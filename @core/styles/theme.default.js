@@ -47,15 +47,15 @@ const theme = {
     threeTimes: "1.875rem",
     fourTimes: "2.25rem",
   },
+  fontWeights: {
+    semiBold: "600",
+  },
   lineHeights: {
     small: "1.25rem",
     base: "1.5rem",
     twoTimes: "2rem",
     threeTimes: "2.25rem",
     fourTimes: "2.5rem",
-  },
-  fontWeights: {
-    semiBold: "600",
   },
 };
 

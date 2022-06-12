@@ -1,43 +1,27 @@
 import React from "react";
-import Link from "next/link";
 import BlockContent from "@sanity/block-content-to-react";
 
-import Center from "../components/Center";
-import Emphasis from "../components/Emphasis";
-import Paragraph from "../components/MUI/Paragraph";
-import CustomLink from "../components/CustomLink";
-import PageTitle from "../components/PageTitle/PageTitle";
-
-import createParagraphChildren from "../components/MUI/Paragraph/utilities/createParagraphChildren";
+import { Center } from "../@core/components/Center";
+import { createChildren } from "../@core/utilities/typography-utils";
+import { Emphasis } from "../@core/components/Emphasis";
+import { PageParagraph } from "../@core/components/PageParagraph";
 
 const BlockRenderer = (props) => {
-  const { style = "normal" } = props.node;
+  const { style } = props.node;
 
-  if (/^h\d/.test(style)) {
-    const level = style.replace(/[^\d]/g, "");
+  if (style === "center") {
+    const children = createChildren(props.children);
+    return <Center>{children}</Center>;
+  }
 
-    return <PageTitle header={Number(level)}>{props.children}</PageTitle>;
+  if (style === "em") {
+    const children = createChildren(props.children);
+    return <Emphasis>{children}</Emphasis>;
   }
 
   if (style === "normal") {
-    const childrenWithCustomComponents = createParagraphChildren(
-      props.children,
-      CustomLink,
-      Link
-    );
-    return <Paragraph>{childrenWithCustomComponents}</Paragraph>;
-  }
-
-  // if (style === "blockquote") {
-  //   return <blockquote>- {props.children}</blockquote>;
-  // }
-
-  if (style === "em") {
-    return <Emphasis>{props.children}</Emphasis>;
-  }
-
-  if (style === "center") {
-    return <Center>{props.children}</Center>;
+    const children = createChildren(props.children);
+    return <PageParagraph>{children}</PageParagraph>;
   }
 
   // Fall back to default handling

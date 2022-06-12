@@ -16,14 +16,13 @@ import CarouselRenderer from "../renderers/CarouselRenderer";
 import SideCarouselRenderer from "../renderers/SideCarouselRenderer";
 import TextCarouselRenderer from "../renderers/TextCarouselRenderer";
 import RedBallRenderer from "../renderers/RedBallRenderer";
-import DarkenSliderRenderer from "../renderers/DarkenSliderRenderer";
+// import DarkenSliderRenderer from "../renderers/DarkenSliderRenderer";
 import TripAdvisorRenderer from "../renderers/TripAdvisorRenderer";
 import YoutubeRenderer from "../renderers/YoutubeRenderer";
 
 // Components
 import { Header } from "../@platform/components/Header/Header";
-import Footer from "../components/MUI/Footer";
-import FooterNavbar from "../components/MUI/FooterNavbar";
+import { Footer } from "../@platform/components/Footer/Footer";
 
 import styles from "../@core/styles/theme.default";
 
@@ -34,13 +33,11 @@ function Pages({
     body: [],
   },
   headerLinks,
-  footerData,
 }) {
   const { body, title, description } = page;
   return (
     <main style={{ overflow: "hidden" }}>
       <Head>
-        {/* <meta name="viewport" content="width=device-width" /> */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="description" content={description}></meta>
@@ -49,35 +46,36 @@ function Pages({
       <Theme>
         <Fonts />
         {headerLinks && <Header links={headerLinks} />}
-        {/* <HeaderNavbar LinkComponent={Link} links={headerLinks} /> */}
-        <BlockContent
-          blocks={body || []}
-          serializers={{
-            types: {
-              block: BlockRenderer, // Default
-              break: BreakRenderer,
-              redBallList: ObjectRenderer,
-              redBall: RedBallRenderer,
-              carousel: CarouselRenderer,
-              sideCarousel: SideCarouselRenderer,
-              text_carousel: TextCarouselRenderer,
-              darkenSlider: DarkenSliderRenderer,
-              tripAdvisor: TripAdvisorRenderer,
-              youtube: YoutubeRenderer,
+        <div style={{ paddingBottom: "80px" }}>
+          <BlockContent
+            blocks={body || []}
+            serializers={{
+              types: {
+                block: BlockRenderer, // Default
+                break: BreakRenderer,
+                redBallList: ObjectRenderer,
+                redBall: RedBallRenderer,
+                carousel: CarouselRenderer,
+                sideCarousel: SideCarouselRenderer,
+                tripAdvisor: TripAdvisorRenderer,
+                youtube: YoutubeRenderer,
 
-              // Objects
-              pageTitles: ObjectRenderer,
+                // Objects
+                columnOfLinks: ObjectRenderer,
+                darkenSlider: ObjectRenderer,
+                pageTitles: ObjectRenderer,
+                text_carousel: ObjectRenderer, // change to textCarousel
 
-              // Images
-              image: ImageRenderer,
-              images: ImageRenderer,
-              doubleImages: ImageRenderer,
-            },
-          }}
-          {...client.config()}
-        />
-        {footerData && <Footer data={footerData} />}
-        {footerData && <FooterNavbar data={footerData} />} Mobile only
+                // Images
+                image: ImageRenderer,
+                images: ImageRenderer,
+                doubleImages: ImageRenderer,
+              },
+            }}
+            {...client.config()}
+          />
+        </div>
+        <Footer />
       </Theme>
     </main>
   );
@@ -112,14 +110,14 @@ export async function getStaticProps(context) {
   const header = await client.fetch(headerQuery);
   const headerLinks = header[0].links;
   const footer = await client.fetch(footerQuery);
-  const footerData = footer[0];
+  // const footerData = footer[0];
 
   try {
     const page = await client.fetch(query, { slug: slug[0] });
     return {
       props: {
         headerLinks: headerLinks,
-        footerData: footerData,
+        // footerData: footerData,
         page: page || {},
         slug: slug[0],
       },
@@ -129,7 +127,7 @@ export async function getStaticProps(context) {
     return {
       props: {
         headerLinks: headerLinks,
-        footerData: footerData,
+        // footerData: footerData,
         page: page,
         slug: "home-page",
       },

@@ -2,3 +2,17 @@ html,
 body {
   margin: 0;
 }
+
+a {
+  color: #350313;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #aa4465;
+  font-weight: bold;
+}
+
+a > strong:hover {
+  color: #aa4465;
+}

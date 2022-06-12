@@ -4,6 +4,7 @@ import Link from "next/link";
 import DarkenSlider from "../../components/DarkenSlider";
 
 import sampleData from "../../components/DarkenSlider/data";
+
 function DarkenSlidersPage() {
   const withComponent = sampleData.map((d) => {
     return {
@@ -11,11 +12,7 @@ function DarkenSlidersPage() {
       Component: Link,
     };
   });
-  return (
-    <div>
-      <DarkenSlider list={withComponent} />
-    </div>
-  );
+  return <DarkenSlider list={withComponent} />;
 }
 
 export default DarkenSlidersPage;

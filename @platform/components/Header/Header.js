@@ -1,58 +1,97 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { CustomLink } from "./CustomLink";
+import { Hamburger } from "../../../@core/components/Hamburger";
+import { HeaderLink } from "./HeaderLink";
 import { Logo } from "../Logo";
 
 import device from "../../../styles/device";
 
-const LinksList = styled.ul`
-  display: flex;
-  list-style-type: none;
-  padding: 0;
+/**
+ * Check mobile scaling for everything.
+ *
+ * Clean up the scaling its ugly with how thick it is.
+ *
+ * Check to make sure the links are clear and far away.
+ *
+ * Need a proper Hamburger.
+ *
+ * If we scroll or click off the header close the dropdown.
+ */
+
+// const Hamburger = styled.span`
+//   display: inline-block;
+//   margin-top: 16px;
+
+// &:hover {
+//   cursor: pointer;
+// }
+
+// @media ${device.tablet} {
+//   display: none;
+// }
+// `;
+
+const HeaderContainer = styled.header`
+  display: ${({ theme }) => theme.fonts.droid};
+  z-index: 30;
 `;
 
-const ScrollingNavbar = styled.nav`
-  background: ${(props) => props.theme.colors.mediumRed};
-  color: #ffffff;
-  display: ${(props) => (props.isScrolling ? "block" : "none")};
-  position: fixed;
-  top: 0;
-  width: 100%;
-`;
-
-const ScrollingNavbarTwo = styled.nav`
-  background: ${(props) => props.theme.colors.mediumRed};
-  color: #ffffff;
-  display: block;
-  position: fixed;
-  top: 0;
+const LinksContainer = styled.div`
+  display: ${(props) => (props.displayDropdown ? "flex" : "none")};
+  flex-direction: column;
   width: 100%;
 
-  @media ${device.cs} {
-    display: none;
+  @media ${device.tablet} {
+    display: flex;
+    flex-direction: row;
   }
 `;
 
-const TopNavbar = styled.nav`
+const LinksList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+
+  @media ${device.tablet} {
+    flex-direction: row;
+  }
+`;
+
+const ScrollingNavbar = styled.nav`
+  background: rgba(104, 7, 39, 0.8);
+  color: #ffffff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 30;
+
+  @media ${device.cs} {
+    display: ${(props) => (props.isScrolling ? "block" : "none")};
+  }
+`;
+
+const RegularNavbarWithoutScrolling = styled.nav`
   background: rgba(0, 0, 0, 0.3);
   color: #ffffff;
   display: none;
   left: 50%;
+  overflow: hidden;
   position: absolute;
   transform: translate(-50%, 0);
-  width: 80%;
+  width: 100%;
+  z-index: 30;
 
   @media ${device.cs} {
     display: block;
   }
 `;
 
-const TransparentBackground = styled.div`
-  border: 1px solid transparent;
-`;
-
 export const Header = ({ links }) => {
+  const [displayDropdown, setDisplayDropdown] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
 
   const handleNavigation = (e) => {
@@ -72,37 +111,36 @@ export const Header = ({ links }) => {
     };
   }, [isScrolling]);
   return (
-    <>
+    <HeaderContainer>
       {!isScrolling && (
-        <TopNavbar>
-          <TransparentBackground>
-            <LinksList>
-              <Logo />
-              {links.map((link) => (
-                <CustomLink key={link.href} link={link} />
-              ))}
-            </LinksList>
-          </TransparentBackground>
-        </TopNavbar>
+        <RegularNavbarWithoutScrolling>
+          <LinksList>
+            <Logo />
+            {links.map((link) => (
+              <HeaderLink key={link.href} link={link} />
+            ))}
+          </LinksList>
+        </RegularNavbarWithoutScrolling>
       )}
-      {/** Not when scrolling just same style. */}
-      <ScrollingNavbarTwo isScrolling={isScrolling}>
-        <LinksList>
-          <Logo />
-          {links.map((link) => (
-            <CustomLink key={link.href} link={link} />
-          ))}
-        </LinksList>
-      </ScrollingNavbarTwo>
-      {/** Only when scrolling. */}
       <ScrollingNavbar isScrolling={isScrolling}>
         <LinksList>
-          <Logo />
-          {links.map((link) => (
-            <CustomLink key={link.href} link={link} />
-          ))}
+          <Logo half={true} />
+          <Hamburger
+            onClick={() => setDisplayDropdown(!displayDropdown)}
+            opened={displayDropdown}
+          />
+          <LinksContainer displayDropdown={displayDropdown}>
+            {links.map((link) => (
+              <HeaderLink
+                displayDropdown={displayDropdown}
+                half={true}
+                key={link.href}
+                link={link}
+              />
+            ))}
+          </LinksContainer>
         </LinksList>
       </ScrollingNavbar>
-    </>
+    </HeaderContainer>
   );
 };

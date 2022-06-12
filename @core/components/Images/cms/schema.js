@@ -17,7 +17,6 @@ export default {
           title: "Alt",
           type: "string",
           description: "What appears if the image is not loaded; good for SEO.",
-          validation: (Rule) => Rule.required(),
         },
         {
           name: "height",
@@ -40,6 +39,13 @@ export default {
           type: "boolean",
           initialValue: true,
         },
+        {
+          name: "margin",
+          title: "Margin",
+          description: "Vertical spacing",
+          type: "number",
+          initialValue: 0
+        }
       ],
     },
     {
@@ -59,7 +65,6 @@ export default {
               type: "string",
               description:
                 "What appears if the image is not loaded; good for SEO.",
-              validation: (Rule) => Rule.required(),
             },
           ],
         },

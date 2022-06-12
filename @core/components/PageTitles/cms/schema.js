@@ -41,21 +41,39 @@ export default {
       type: "boolean",
       initialValue: true,
     },
+    {
+      name: "margin",
+      title: "Margin",
+      description: "Vertical margin to help space.",
+      type: "number",
+      initialValue: 0,
+    },
+    {
+      name: "fullScreen",
+      title: "Full Screen",
+      description: "Whether or not the width is full screen or not.",
+      type: "boolean",
+      initialValue: false,
+    },
   ],
   preview: {
     select: {
-      text: "text",
       bnb: "bnb",
-      header: "header",
       center: "center",
+      fullScreen: "fullScreen",
+      header: "header",
+      margin: "margin",
+      text: "text",
     },
     prepare(selection) {
-      const { text, bnb, header, center } = selection;
+      const { bnb, center, fullScreen, header, margin, text } = selection;
       return {
-        text,
         bnb,
-        header,
         center,
+        fullScreen,
+        header,
+        margin,
+        text,
       };
     },
     component: Preview,

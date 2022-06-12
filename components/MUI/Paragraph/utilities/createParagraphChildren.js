@@ -3,37 +3,41 @@ import React from "react";
 import hrefLocation from "../../../CustomLink/utilities/hrefLocation";
 
 function createParagraphChildren(children, LinkComponent, NextComponent) {
-  const newChildren = children.map((child) => {
+  const newChildren = children.map((child, idx) => {
     if (typeof child === "string") {
       return child;
     } else {
       // Type is an object
-      const { node } = child.props;
-      const { mark } = node;
-      const { _type } = mark;
-      const text = node.children[0];
-      if (_type === "link") {
-        const { href } = mark;
-        const location = hrefLocation(href);
-        if (location === "foreign") {
-          return (
-            <LinkComponent href={href} key={href + text + randNumber()}>
-              {text}
-            </LinkComponent>
-          );
+      try {
+        const { node } = child.props;
+        const { mark } = node;
+        const { _type } = mark;
+        const text = node.children[0];
+        if (_type === "link") {
+          const { href } = mark;
+          const location = hrefLocation(href);
+          if (location === "foreign") {
+            return (
+              <LinkComponent href={href} key={href + text + randNumber()}>
+                {text}
+              </LinkComponent>
+            );
+          } else {
+            return (
+              <LinkComponent
+                Component={NextComponent}
+                href={href}
+                key={href + text + randNumber()}
+              >
+                {text}
+              </LinkComponent>
+            );
+          }
         } else {
-          return (
-            <LinkComponent
-              Component={NextComponent}
-              href={href}
-              key={href + text + randNumber()}
-            >
-              {text}
-            </LinkComponent>
-          );
+          return <strong key={node.children[0]}>{node.children[0]}</strong>;
         }
-      } else {
-        return <strong key={node.children[0]}>{node.children[0]}</strong>;
+      } catch {
+        return <div key={idx} style={{ whiteSpace: "pre" }} />;
       }
     }
   });
