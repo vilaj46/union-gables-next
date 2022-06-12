@@ -98,7 +98,7 @@ export const HeaderLink = ({ displayDropdown, half, link }) => {
       {!isBookNow && (
         <Link href={link.href}>
           <Anchor half={half} openDisplayDropdown={openDisplayDropdown}>
-            {link.label} {link.dropdown.length > 0 && <Caret>&#94;</Caret>}
+            {link.label} {link.dropdown && link.dropdown.length > 0 && <Caret>&#94;</Caret>}
           </Anchor>
         </Link>
       )}
